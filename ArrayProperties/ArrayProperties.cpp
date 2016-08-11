@@ -7,6 +7,7 @@ This program gives the mean, median, maximum, minimum and mode of a set of 10 nu
 #include "stdafx.h"
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 //Prototypes of functions
@@ -17,7 +18,7 @@ int main() {
 	int userChoice;
 	bool completed = false;
 
-	cout << "You have 2 choices: \n1) Enter 2 arrays, each with 9 terms and the corresponding terms will be added \n2) Enter a 9 digit array, and basic properties will be printed \n\nEnter 1 or 2 to select choice: ";
+	cout << "You have 2 choices: \n1) Enter 2 arrays, and the corresponding terms will be added \n2) Enter an array, and basic properties will be printed \n\nEnter 1 or 2 to select choice: ";
 	cin >> userChoice;
 	if (userChoice == 1) {
 		arraySums();
@@ -32,41 +33,55 @@ int main() {
 }
 
 void arraySums() {
+	int arrLength;
 	cout << "This part of the program allows the user to enter two arrays and view sums of corresponding terms." << endl;
-	int numbersFirst[9];
-	int numbersSecond[9];
+	cout << "How long do you want your arrays to be (enter an integer)? ";
+	cin >> arrLength;
+	vector<int> arrOne(arrLength);
+	vector<int> arrTwo(arrLength);
 	int sumValPrint;
 	const int numbersLength = 9;
-	for (int i = 0; i < numbersLength; i++) { //stores numbers entered into array of 9 vals
+	for (int i = 0; i < arrLength; i++) { //stores numbers entered into array of 9 vals
 		cout << "Please enter you next number: ";
-		cin >> numbersFirst[i];
+		cin >> arrOne[i];
 	}
 	cout << "congrats u entered ur first array!" << endl;
-	for (int i = 0; i < numbersLength; i++) { //stores numbers entered into array of 9 vals
+	for (int i = 0; i < arrLength; i++) { //stores numbers entered into array of 9 vals
 		cout << "Please enter you next number: ";
-		cin >> numbersSecond[i];
+		cin >> arrTwo[i];
 	}
-	for (int i = 0; i < numbersLength; i++) { //stores numbers entered into array of 9 vals
-		sumValPrint = numbersFirst[i] + numbersSecond[i];
+	cout << "\nYour arrays are: \n" << endl;
+	for (int i = 0; i < arrLength; i++) {
+		cout << arrOne[i] << " ";
+	}
+	cout << "\n" << endl;
+	for (int i = 0; i < arrLength; i++) {
+		cout << arrTwo[i] << " ";
+	}
+	cout << "\n" << endl;
+	for (int i = 0; i < arrLength; i++) { //stores numbers entered into array of 9 vals
+		sumValPrint = arrOne[i] + arrTwo[i];
 		int term = i + 1;
 		cout << "The sum of the " << term << " of the the sequence is: " << sumValPrint << endl;
 	}
 }
 void arrayProps() {
-	cout << "\nThis part of the program gives the mean, median, maximum, minimum and mode of a set of 9 integers entered by the user." << endl;
-	int numbers[9];
-	const int numbersLength = 9;
+	int numbersLength;
+	cout << "This part of the program allows the user to enter one array and view the basic properties of it." << endl;
+	cout << "How long do you want your array to be (enter an integer)? ";
+	cin >> numbersLength;
+	vector<int> numbers(numbersLength);
 	for (int i = 0; i < numbersLength; i++) { //stores numbers entered into array of 9 vals
 		cout << "Please enter you next number: ";
 		cin >> numbers[i];
 	}
-	sort(numbers, numbers + numbersLength); //sorts from least to greatest
+	sort(numbers.begin(), numbers.end()); //sorts from least to greatest
 	int total = 0;
 	for (int i = 0; i < numbersLength; i++) { //calculates total of array
 		total += numbers[i];
 	}
 	int mean = total / numbersLength;
-	int maximum = 0;
+	int maximum = numbers[0];
 	for (int i = 0; i < numbersLength; i++) { //calculates max, this val will be used to calc min as well
 		if (numbers[i] >= maximum) { //this allows recurring checks of whether the val is indeed greatest
 			maximum = numbers[i];
@@ -79,14 +94,16 @@ void arrayProps() {
 		}
 	}
 	int median = numbers[((numbersLength + 1) / 2) - 1];
-	cout << "9 integers have been entered" << endl; //gives users the info!!
+	cout << numbersLength << " integers have been entered\n" << endl; //gives users the info!!
+	cout << "\nYour array is: \n" << endl;
 	for (int i = 0; i < numbersLength; i++) {
-		cout << numbers[i];
+		cout << numbers[i] << " ";
 	}
+
+	cout << "\n\nTotal of set: " << total << endl;
 	cout << "Mean of set: " << mean << endl;
 	cout << "Median of set: " << median << endl;
 	cout << "Maximum of set: " << maximum << endl;
 	cout << "Minimum of set: " << minimum << endl;
-	cout << "\nPress enter to exit. . ." << endl;
 }
 
