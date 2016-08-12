@@ -1,3 +1,6 @@
+#---MAKE SURE TO REBUILD CODE WITH VStudio---
+
+
 # Function 1:
 Takes two arrays of userdefined length and adds the corresponding terms.
 
